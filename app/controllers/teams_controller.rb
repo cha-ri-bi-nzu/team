@@ -15,6 +15,7 @@ class TeamsController < ApplicationController
   def owners
     @team = Team.friendly.find(params[:team_id])
     if @team.update_attribute(:owner_id, params[:user_id])
+      OwnerChangeMailer.owner_change_mail(@team.owner).deliver
       redirect_to @team
     else
       flash.now[:error] = I18n.t('views.messages.failed_to_save_team')

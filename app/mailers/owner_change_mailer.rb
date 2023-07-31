@@ -5,9 +5,9 @@ class OwnerChangeMailer < ApplicationMailer
   #
   #   en.owner_change_mailer.owner_change_mail.subject
   #
-  def owner_change_mail
-    @greeting = "Hi"
+  def owner_change_mail(new_owner)
+    @owner = new_owner
 
-    mail to: "to@example.org"
+    mail to: @owner.email, subject: "チームオーナー権限譲渡の通知"
   end
 end
